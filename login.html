@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h2>Purohit Login / లాగిన్</h2>
+
+<input type="tel" id="loginPhone" placeholder="Phone Number" maxlength="10">
+
+<input type="password" id="loginPassword" placeholder="Password">
+
+<button onclick="loginWithPassword()">Login with Password</button>
+
+<hr>
+
+<button onclick="sendOTP()">Login with OTP</button>
+
+<div id="otpSection" style="display:none;">
+  <input type="text" id="otp" placeholder="Enter OTP">
+  <button onclick="verifyOTP()">Verify OTP</button>
+</div>
+
+</div>
+
+<script>
+function loginWithPassword(){
+  let data = JSON.parse(localStorage.getItem("purohitData"));
+
+  let phone = document.getElementById("loginPhone").value;
+  let pass = document.getElementById("loginPassword").value;
+
+  if(data.phone === phone && data.password === pass){
+    alert("Login Success");
+  } else {
+    alert("Invalid Credentials");
+  }
+}
+
+// OTP SYSTEM (SIMULATED)
+let generatedOTP;
+
+function sendOTP(){
+  generatedOTP = Math.floor(1000 + Math.random()*9000);
+  alert("OTP Sent: " + generatedOTP); // simulate
+
+  document.getElementById("otpSection").style.display = "block";
+}
+
+function verifyOTP(){
+  let otp = document.getElementById("otp").value;
+
+  if(otp == generatedOTP){
+    alert("Login Success via OTP");
+  } else {
+    alert("Wrong OTP");
+  }
+}
+</script>
+
+</body>
+</html>

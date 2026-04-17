@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Purohit Registration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>Purohit Registration / పూజారి నమోదు</h2>
+  <p class="subtitle">Join as a Spiritual Guide / ఆధ్యాత్మిక సేవలో చేరండి</p>
+
+  <form id="registerForm">
+
+    <!-- PHOTO -->
+    <div class="photo-preview">
+      <img id="previewImg" src="https://via.placeholder.com/120">
+      
+      <label class="upload-btn">
+        Upload Photo / ఫోటో అప్లోడ్
+        <input type="file" id="photo" accept="image/*" required>
+      </label>
+    </div>
+
+    <!-- NAME -->
+    <input type="text" id="name" placeholder="Purohit Name / పేరు" required>
+
+    <!-- PHONE -->
+    <div class="phone-box">
+      <span class="country-code">+91</span>
+      <input type="tel" id="phone" maxlength="10" required placeholder="Phone Number / ఫోన్">
+    </div>
+
+    <!-- EMAIL -->
+    <input type="email" id="email" placeholder="Email (Optional) / ఇమెయిల్">
+
+    <!-- PASSWORD -->
+    <input type="password" id="password" placeholder="Password / పాస్‌వర్డ్" minlength="6" required>
+
+    <!-- CONFIRM PASSWORD -->
+    <input type="password" id="confirmPassword" placeholder="Confirm Password / నిర్ధారణ" required>
+
+    <!-- DOB -->
+    <input type="date" id="dob" required>
+
+    <!-- VEDAS -->
+    <label>Vedas Learned / వేదాలు</label>
+    <div class="checkbox-group" id="vedas">
+
+      <label>
+        <input type="checkbox" value="Rigveda">
+        <div class="veda-text">Rigveda <small>ఋగ్వేదం</small></div>
+      </label>
+
+      <label>
+        <input type="checkbox" value="Yajurveda">
+        <div class="veda-text">Yajurveda <small>యజుర్వేదం</small></div>
+      </label>
+
+      <label>
+        <input type="checkbox" value="Samaveda">
+        <div class="veda-text">Samaveda <small>సామవేదం</small></div>
+      </label>
+
+      <label>
+        <input type="checkbox" value="Atharvaveda">
+        <div class="veda-text">Atharvaveda <small>అథర్వవేదం</small></div>
+      </label>
+
+    </div>
+
+    <!-- SUB VEDAS -->
+    <label>Sub-Vedas / ఉప వేదాలు</label>
+    <div class="tag-input-box">
+      <div id="tags"></div>
+      <input type="text" id="tagInput" placeholder="Type & press Enter">
+    </div>
+
+    <div class="sub-veda-suggestions">
+      <span>Shukla Yajurveda</span>
+      <span>Krishna Yajurveda</span>
+      <span>Taittiriya</span>
+      <span>Sama Gana</span>
+    </div>
+
+    <!-- UPANAYANA -->
+    <select id="upanayana" required>
+      <option value="">Upanayana / ఉపనయనం</option>
+      <option value="yes">Yes / అయ్యింది</option>
+      <option value="no">No / అవ్వలేదు</option>
+    </select>
+
+    <!-- MARRIAGE -->
+    <div id="marriageSection" style="display:none;">
+      <select id="married">
+        <option value="">Married / వివాహం</option>
+        <option>Yes / అయ్యింది</option>
+        <option>No / అవ్వలేదు</option>
+      </select>
+    </div>
+
+    <!-- GOTRAM -->
+    <input type="text" id="gotram" placeholder="Gotram / గోత్రం" required>
+
+    <!-- UPASANA -->
+    <input type="text" id="upasana" placeholder="Upasana (Optional) / అనుష్ఠానం">
+
+    <button type="submit">Preview / ప్రివ్యూ</button>
+
+  </form>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html> 
