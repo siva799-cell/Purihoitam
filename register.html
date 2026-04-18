@@ -278,10 +278,10 @@ button:hover {
     <label>Vedas Learned / వేదాలు</label>
     <div class="checkbox-group">
 
-      <label><input type="checkbox"> <div class="veda-text">Rigveda <small>ఋగ్వేదం</small></div></label>
-      <label><input type="checkbox"> <div class="veda-text">Yajurveda <small>యజుర్వేదం</small></div></label>
-      <label><input type="checkbox"> <div class="veda-text">Samaveda <small>సామవేదం</small></div></label>
-      <label><input type="checkbox"> <div class="veda-text">Atharvaveda <small>అథర్వవేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="rigveda"> <div class="veda-text">Rigveda <small>ఋగ్వేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="yajurveda"> <div class="veda-text">Yajurveda <small>యజుర్వేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="samaveda"> <div class="veda-text">Samaveda <small>సామవేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="atharvaveda"> <div class="veda-text">Atharvaveda <small>అథర్వవేదం</small></div></label>
 
     </div>
 
@@ -372,7 +372,7 @@ document.getElementById("upanayana").addEventListener("change", function(){
 });
 
 // FORM SUBMIT
-document.getElementById("registerForm").addEventListener("submit", function(e){
+document.getElementById("registerForm").addEventListener("submit", async function(e){
   e.preventDefault();
 
   let pass = document.getElementById("password").value;
@@ -383,7 +383,70 @@ document.getElementById("registerForm").addEventListener("submit", function(e){
     return;
   }
 
-  alert("All good! Ready for Preview 🚀");
+  // Collect form data
+  let formData = new FormData();
+  
+  // Get photo
+  let photoFile = document.getElementById("photo").files[0];
+  if(photoFile){
+    formData.append("photo", photoFile);
+  }
+
+  // Get basic info
+  formData.append("name", document.getElementById("name").value);
+  formData.append("phone", document.getElementById("phone").value);
+  formData.append("email", document.getElementById("email").value);
+  formData.append("password", document.getElementById("password").value);
+  formData.append("dob", document.getElementById("dob").value);
+  formData.append("gotram", document.getElementById("gotram").value);
+  formData.append("upasana", document.getElementById("upasana").value);
+  formData.append("upanayana", document.getElementById("upanayana").value);
+
+  // Get selected vedas
+  let vedas = {
+    rigveda: false,
+    yajurveda: false,
+    samaveda: false,
+    atharvaveda: false
+  };
+
+  document.querySelectorAll("input[name='vedas']:checked").forEach(checkbox => {
+    vedas[checkbox.value] = true;
+  });
+  formData.append("vedas", JSON.stringify(vedas));
+
+  // Get sub-vedas (tags)
+  let subVedas = [];
+  document.querySelectorAll(".tag").forEach(tag => {
+    subVedas.push(tag.innerText.replace("×", "").trim());
+  });
+  formData.append("subVedas", JSON.stringify(subVedas));
+
+  // Get married status if upanayana is yes
+  if(document.getElementById("upanayana").value === "yes"){
+    formData.append("married", document.getElementById("married").value);
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/api/register", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if(response.ok){
+      alert("Registration successful! 🚀\nPurohit ID: " + data.data.id);
+      document.getElementById("registerForm").reset();
+      document.getElementById("previewImg").src = "https://via.placeholder.com/120";
+      document.getElementById("tags").innerHTML = "";
+    } else {
+      alert("Error: " + (data.message || "Registration failed"));
+    }
+  } catch(error) {
+    alert("Network error: " + error.message);
+    console.error("Error:", error);
+  }
 });
 </script>
 
