@@ -2,8 +2,238 @@
 <html>
 <head>
   <title>Purohit Registration</title>
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* BODY */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f3e5ab, #ffd89b, #ffb347);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+/* CONTAINER */
+.container {
+  width: 95%;
+  max-width: 650px;
+  margin: 40px 0;
+  padding: 25px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgb(154, 145, 85);
+}
+
+/* HEADINGS */
+h2 {
+  text-align: center;
+  color: #ff6600;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* INPUTS */
+input, select {
+  width: 100%;
+  height: 48px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* PHOTO */
+.photo-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-preview img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #ff9933;
+  object-fit: cover;
+}
+
+.upload-btn {
+  margin-top: 10px;
+  padding: 8px 15px;
+  background: linear-gradient(to right, #ff8000, #ff9933);
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.upload-btn input {
+  display: none;
+}
+
+/* PHONE */
+.phone-box {
+  display: flex;
+  height: 48px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.country-code {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffe0b3;
+  font-weight: bold;
+}
+
+.phone-box input {
+  border: none;
+  flex: 1;
+  height: 100%;
+}
+
+/* VEDAS */
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.checkbox-group label {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #fff5e6;
+  border-radius: 8px;
+  border: 1px solid #ffd699;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.checkbox-group label:hover {
+  background: #ffe0b3;
+}
+
+.checkbox-group input {
+  transform: scale(0.7);
+  margin: 0;
+}
+
+/* TEXT */
+.veda-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.veda-text small {
+  font-size: 11px;
+  color: #555;
+}
+
+/* TAG INPUT */
+.tag-input-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 6px;
+  min-height: 48px;
+  background: #fff;
+}
+
+#tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  background: #ffe0b3;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.tag span {
+  margin-left: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #cc6600;
+}
+
+.tag-input-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  min-width: 120px;
+}
+
+/* SUGGESTIONS */
+.sub-veda-suggestions span {
+  padding: 5px 10px;
+  background: #ffe0b3;
+  margin: 4px;
+  display: inline-block;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.sub-veda-suggestions span:hover {
+  background: #ffcc80;
+}
+
+/* BUTTON */
+button {
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #ff8000, #ff9933);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+}
+  </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -46,27 +276,12 @@
 
     <!-- VEDAS -->
     <label>Vedas Learned / వేదాలు</label>
-    <div class="checkbox-group" id="vedas">
+    <div class="checkbox-group">
 
-      <label>
-        <input type="checkbox" value="Rigveda">
-        <div class="veda-text">Rigveda <small>ఋగ్వేదం</small></div>
-      </label>
-
-      <label>
-        <input type="checkbox" value="Yajurveda">
-        <div class="veda-text">Yajurveda <small>యజుర్వేదం</small></div>
-      </label>
-
-      <label>
-        <input type="checkbox" value="Samaveda">
-        <div class="veda-text">Samaveda <small>సామవేదం</small></div>
-      </label>
-
-      <label>
-        <input type="checkbox" value="Atharvaveda">
-        <div class="veda-text">Atharvaveda <small>అథర్వవేదం</small></div>
-      </label>
+      <label><input type="checkbox"> <div class="veda-text">Rigveda <small>ఋగ్వేదం</small></div></label>
+      <label><input type="checkbox"> <div class="veda-text">Yajurveda <small>యజుర్వేదం</small></div></label>
+      <label><input type="checkbox"> <div class="veda-text">Samaveda <small>సామవేదం</small></div></label>
+      <label><input type="checkbox"> <div class="veda-text">Atharvaveda <small>అథర్వవేదం</small></div></label>
 
     </div>
 
@@ -112,6 +327,65 @@
 
 </div>
 
-<script src="script.js"></script>
+<script>
+// PHOTO PREVIEW
+document.getElementById("photo").addEventListener("change", function(e){
+  let file = e.target.files[0];
+  if(file){
+    document.getElementById("previewImg").src = URL.createObjectURL(file);
+  }
+});
+
+// PHONE VALIDATION
+document.getElementById("phone").addEventListener("input", function(){
+  this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+// TAG SYSTEM
+let input = document.getElementById("tagInput");
+let tagsContainer = document.getElementById("tags");
+
+input.addEventListener("keydown", function(e){
+  if(e.key === "Enter" && input.value.trim() !== ""){
+    e.preventDefault();
+    createTag(input.value.trim());
+    input.value = "";
+  }
+});
+
+function createTag(text){
+  let tag = document.createElement("div");
+  tag.className = "tag";
+  tag.innerHTML = `${text} <span onclick="this.parentElement.remove()">×</span>`;
+  tagsContainer.appendChild(tag);
+}
+
+// SUGGESTIONS
+document.querySelectorAll(".sub-veda-suggestions span").forEach(el=>{
+  el.onclick = () => createTag(el.innerText);
+});
+
+// UPANAYANA
+document.getElementById("upanayana").addEventListener("change", function(){
+  document.getElementById("marriageSection").style.display =
+    this.value === "yes" ? "block" : "none";
+});
+
+// FORM SUBMIT
+document.getElementById("registerForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let pass = document.getElementById("password").value;
+  let confirm = document.getElementById("confirmPassword").value;
+
+  if(pass !== confirm){
+    alert("Passwords do not match / పాస్‌వర్డ్ సరిపోలడం లేదు");
+    return;
+  }
+
+  alert("All good! Ready for Preview 🚀");
+});
+</script>
+
 </body>
-</html> 
+</html>
