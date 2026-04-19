@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purohit Login - Purohit Connect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Telugu Font */
+        @font-face {
+            font-family: 'PottiTelugu';
+            src: url('./fonts/PottiSreeramulu-Regular.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f3e5ab, #ffd89b, #ffb347);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgb(154, 145, 85);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6a00, #ff8c42);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff6a00;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #000000;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                opacity: 0.8;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .telugu-subtitle {
+            color: #ff8c42;
+            font-family: 'PottiTelugu', serif;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff6a00;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.1);
+        }
+
+        .form-group input[type="tel"] {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            border-left: none;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            padding-left: 10px;
+        }
+
+        .mobile-input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .mobile-input-wrapper:focus-within {
+            border-color: #ff6a00;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.1);
+        }
+
+        .country-code {
+            background: #e9ecef;
+            padding: 15px 12px;
+            border-right: 2px solid #e1e5e9;
+            color: #495057;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            user-select: none;
+        }
+
+        .mobile-input-wrapper input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 15px 20px 15px 10px;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .mobile-input-wrapper input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .form-group small {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+            font-style: italic;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 45px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #ff6a00;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff6a00, #ff8c42);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 106, 0, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e5e9;
+        }
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 15px;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link a {
+            color: #ff6a00;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: #e55a00;
+            text-decoration: underline;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ff6a00;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e74c3c;
+            display: none;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #363;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .form-group input {
+                padding: 12px 16px;
+            }
+
+            .login-btn {
+                padding: 14px;
+            }
+        }
+
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container {
+            animation: slideIn 0.6s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="main.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">🕉 Purohit Connect</div>
+            <div class="subtitle">Purohit Login Portal</div>
+            <div class="telugu-subtitle">పురోహితుని లాగిన్ పోర్టల్</div>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="mobile">Mobile Number / మొబైల్ నంబర్ <span style="color: red;">*</span></label>
+                <div class="mobile-input-wrapper">
+                    <span class="country-code">+91</span>
+                    <input type="tel" id="mobile" name="mobile" placeholder="Enter your 10-digit mobile number"
+                        pattern="[6-9][0-9]{9}" maxlength="10" required>
+                </div>
+                <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">Enter 10-digit mobile
+                    number starting with 6-9</small>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password / పాస్‌వర్డ్ <span style="color: red;">*</span></label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <i class="fas fa-eye password-toggle" id="passwordToggle"></i>
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Login / లాగిన్
+            </button>
+        </form>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <div class="register-link">
+            <p>New to Purohit Connect? <a href="register.html">Register as Purohit</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Password toggle functionality
+        document.getElementById('passwordToggle').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const icon = this;
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Form validation and submission
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const mobile = document.getElementById('mobile').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Hide previous messages
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+
+            // Basic validation
+            if (!mobile || !password) {
+                showError('Please fill in all fields / అన్ని ఫీల్డ్‌లను పూరించండి');
+                return;
+            }
+
+            if (!isValidMobile(mobile)) {
+                showError('Please enter a valid 10-digit mobile number starting with 6-9 / 6-9తో ప్రారంభమయ్యే చెల్లుబాటు అయ్యే 10 అంకెల మొబైల్ నంబర్ నమోదు చేయండి');
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters long / పాస్‌వర్డ్ కనీసం 6 అక్షరాలు ఉండాలి');
+                return;
+            }
+
+            // Simulate login process
+            showSuccess('Login successful! Redirecting... / లాగిన్ విజయవంతం! దారిమార్పు చేస్తోంది...');
+
+            // Here you would typically send the data to your backend
+            // For now, we'll simulate a successful login
+            setTimeout(() => {
+                // Set login state and user info
+                localStorage.setItem('purohitLoggedIn', 'true');
+                localStorage.setItem('purohitMobile', mobile);
+                // Redirect to main page
+                window.location.href = 'main.html';
+            }, 2000);
+        });
+
+        function isValidMobile(mobile) {
+            // Indian mobile number validation: 10 digits, starting with 6-9
+            const mobileRegex = /^[6-9][0-9]{9}$/;
+            return mobileRegex.test(mobile);
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Add input focus effects
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function () {
+                // For mobile input, transform the grandparent (form-group)
+                if (this.id === 'mobile') {
+                    this.parentElement.parentElement.style.transform = 'translateY(-2px)';
+                } else {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                }
+            });
+
+            input.addEventListener('blur', function () {
+                // For mobile input, transform the grandparent (form-group)
+                if (this.id === 'mobile') {
+                    this.parentElement.parentElement.style.transform = 'translateY(0)';
+                } else {
+                    this.parentElement.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Mobile number input formatting and validation
+        document.getElementById('mobile').addEventListener('input', function (e) {
+            // Remove any non-numeric characters
+            let value = this.value.replace(/\D/g, '');
+
+            // Limit to 10 digits
+            if (value.length > 10) {
+                value = value.slice(0, 10);
+            }
+
+            this.value = value;
+
+            // Visual feedback for valid/invalid input
+            const wrapper = this.parentElement;
+            if (value.length === 10 && /^[6-9]/.test(value)) {
+                wrapper.style.borderColor = '#27ae60';
+                wrapper.style.boxShadow = '0 0 0 3px rgba(39, 174, 96, 0.1)';
+            } else if (value.length > 0) {
+                wrapper.style.borderColor = '#e74c3c';
+                wrapper.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.1)';
+            } else {
+                wrapper.style.borderColor = '#e1e5e9';
+                wrapper.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
+</content>
+<parameter name="filePath" purohit_login.html </parameter>

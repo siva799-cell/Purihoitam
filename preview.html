@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Purohit Registration Preview</title>
+
+  <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f3e5ab, #ffd89b, #ffb347);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(154, 145, 85, 0.3);
+  overflow: hidden;
+}
+
+.header {
+  background: linear-gradient(135deg, #ff9933, #ff6600);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.header p {
+  margin: 8px 0 0 0;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+.content {
+  padding: 30px;
+}
+
+.preview-section {
+  display: grid;
+  gap: 20px;
+}
+
+.preview-group {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.preview-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.group-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff6600;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ff9933;
+  padding-bottom: 5px;
+}
+
+.preview-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 12px 0;
+}
+
+.preview-label {
+  font-weight: 600;
+  color: #333;
+  min-width: 140px;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.preview-value {
+  color: #555;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.photo-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.photo-preview {
+  display: inline-block;
+  padding: 15px;
+  background: #fff5e6;
+  border-radius: 50%;
+  border: 3px solid #ff9933;
+  margin-bottom: 10px;
+}
+
+.photo-preview img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-caption {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.veda-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.veda-chip {
+  background: #ffe0b3;
+  color: #ff6600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #ffd699;
+}
+
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-chip {
+  background: #ffe0b3;
+  color: #ff6600;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  border: 1px solid #ffd699;
+}
+
+.actions {
+  background: #f8f8f8;
+  padding: 25px 30px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.edit-btn {
+  background: #666;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #555;
+  transform: translateY(-1px);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #ff8000, #ff9933);
+  color: white;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #ff9933, #ff8000);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 10px;
+    border-radius: 8px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .preview-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .preview-label {
+    min-width: auto;
+    font-weight: 600;
+  }
+
+  .actions {
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h2>Registration Preview / నమోదు ప్రివ్యూ</h2>
+    <p>Review your details before submitting / సమర్పించే ముందు మీ వివరాలను సమీక్షించండి</p>
+  </div>
+
+  <div class="content">
+
+    <!-- PHOTO -->
+    <div class="photo-section">
+      <div class="photo-preview">
+        <img id="previewImg" src="https://via.placeholder.com/120" alt="Profile Photo">
+      </div>
+      <div class="photo-caption">Profile Photo / ప్రొఫైల్ ఫోటో</div>
+    </div>
+
+    <div class="preview-section">
+
+      <!-- BASIC INFORMATION -->
+      <div class="preview-group">
+        <div class="group-title">Basic Information / ప్రాథమిక సమాచారం</div>
+
+        <div class="preview-item">
+          <div class="preview-label">Name / పేరు:</div>
+          <div class="preview-value" id="previewName">-</div>
+        </div>
+
+        <div class="preview-item">
+          <div class="preview-label">Phone / ఫోన్:</div>
+          <div class="preview-value" id="previewPhone">-</div>
+        </div>
+
+        <div class="preview-item">
+          <div class="preview-label">Email / ఇమెయిల్:</div>
+          <div class="preview-value" id="previewEmail">-</div>
+        </div>
+
+        <div class="preview-item">
+          <div class="preview-label">Date of Birth / పుట్టిన తేదీ:</div>
+          <div class="preview-value" id="previewDob">-</div>
+        </div>
+      </div>
+
+      <!-- SPIRITUAL INFORMATION -->
+      <div class="preview-group">
+        <div class="group-title">Spiritual Information / ఆధ్యాత్మిక సమాచారం</div>
+
+        <div class="preview-item">
+          <div class="preview-label">Vedas Learned / వేదాలు:</div>
+          <div class="veda-chips" id="previewVedas">
+            <div class="veda-chip">None selected</div>
+          </div>
+        </div>
+
+        <div class="preview-item">
+          <div class="preview-label">Sub-Vedas / ఉప వేదాలు:</div>
+          <div class="tag-chips" id="previewSubVedas">
+            <span class="tag-chip">None</span>
+          </div>
+        </div>
+
+        <div class="preview-item">
+          <div class="preview-label">Upanayana / ఉపనయనం:</div>
+          <div class="preview-value" id="previewUpanayana">-</div>
+        </div>
+
+        <div class="preview-item" id="marriedItem" style="display:none;">
+          <div class="preview-label">Married / వివాహం:</div>
+          <div class="preview-value" id="previewMarried">-</div>
+        </div>
+
+        <div class="preview-item">
+          <div class="preview-label">Gotram / గోత్రం:</div>
+          <div class="preview-value" id="previewGotram">-</div>
+        </div>
+
+        <div class="preview-item">
+          <div class="preview-label">Upasana / అనుష్ఠానం:</div>
+          <div class="preview-value" id="previewUpasana">-</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="actions">
+    <button class="edit-btn" onclick="goBack()">Edit / సవరించు</button>
+    <button class="submit-btn" onclick="submitRegistration()">Submit / సమర్పించు</button>
+  </div>
+
+</div>
+
+<script>
+// Get data from URL parameters or localStorage
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+// Load preview data
+function loadPreview() {
+  // For demo, using sample data. In real app, get from localStorage or URL
+  document.getElementById('previewName').textContent = getQueryParam('name') || 'Shri Raghavacharya';
+  document.getElementById('previewPhone').textContent = getQueryParam('phone') || '+91 9876543210';
+  document.getElementById('previewEmail').textContent = getQueryParam('email') || 'raghava@example.com';
+  document.getElementById('previewDob').textContent = getQueryParam('dob') || '1980-05-15';
+  document.getElementById('previewUpanayana').textContent = getQueryParam('upanayana') || 'Yes';
+  document.getElementById('previewGotram').textContent = getQueryParam('gotram') || 'Kashyapa';
+  document.getElementById('previewUpasana').textContent = getQueryParam('upasana') || 'Daily Puja';
+
+  // Vedas
+  const vedas = JSON.parse(getQueryParam('vedas') || '{"rigveda":true,"yajurveda":false,"samaveda":true,"atharvaveda":false}');
+  const vedasContainer = document.getElementById('previewVedas');
+  vedasContainer.innerHTML = '';
+  if (vedas.rigveda) vedasContainer.innerHTML += '<div class="veda-chip">Rigveda / ఋగ్వేదం</div>';
+  if (vedas.yajurveda) vedasContainer.innerHTML += '<div class="veda-chip">Yajurveda / యజుర్వేదం</div>';
+  if (vedas.samaveda) vedasContainer.innerHTML += '<div class="veda-chip">Samaveda / సామవేదం</div>';
+  if (vedas.atharvaveda) vedasContainer.innerHTML += '<div class="veda-chip">Atharvaveda / అథర్వవేదం</div>';
+  if (vedasContainer.innerHTML === '') vedasContainer.innerHTML = '<div class="veda-chip">None selected</div>';
+
+  // Sub Vedas
+  const subVedas = JSON.parse(getQueryParam('subVedas') || '["Shukla Yajurveda","Taittiriya"]');
+  const subVedasContainer = document.getElementById('previewSubVedas');
+  subVedasContainer.innerHTML = '';
+  subVedas.forEach(tag => {
+    subVedasContainer.innerHTML += `<span class="tag-chip">${tag}</span>`;
+  });
+  if (subVedas.length === 0) subVedasContainer.innerHTML = '<span class="tag-chip">None</span>';
+
+  // Married
+  const upanayana = getQueryParam('upanayana');
+  if (upanayana === 'yes') {
+    document.getElementById('marriedItem').style.display = 'flex';
+    document.getElementById('previewMarried').textContent = getQueryParam('married') || 'Yes';
+  }
+
+  // Photo from localStorage
+  const photoSrc = localStorage.getItem('previewPhoto');
+  if (photoSrc) {
+    document.getElementById('previewImg').src = photoSrc;
+  }
+}
+
+// Go back to register
+function goBack() {
+  // Don't clear localStorage here, let register page load the data
+  window.location.href = 'register.html';
+}
+
+// Submit registration
+async function submitRegistration() {
+  // Collect data and submit
+  const formData = new FormData();
+  
+  // Add all preview data to formData
+  formData.append('name', document.getElementById('previewName').textContent);
+  formData.append('phone', document.getElementById('previewPhone').textContent.replace('+91 ', ''));
+  formData.append('email', document.getElementById('previewEmail').textContent);
+  formData.append('password', localStorage.getItem('previewPassword') || '');
+  formData.append('dob', document.getElementById('previewDob').textContent);
+  formData.append('upanayana', document.getElementById('previewUpanayana').textContent.toLowerCase());
+  formData.append('gotram', document.getElementById('previewGotram').textContent);
+  formData.append('upasana', document.getElementById('previewUpasana').textContent);
+
+  // Vedas
+  const vedas = {};
+  document.querySelectorAll('.veda-chip').forEach(item => {
+    const text = item.textContent.split(' / ')[0].toLowerCase();
+    vedas[text] = true;
+  });
+  formData.append('vedas', JSON.stringify(vedas));
+
+  // Sub Vedas
+  const subVedas = [];
+  document.querySelectorAll('.tag-chip').forEach(tag => {
+    subVedas.push(tag.textContent);
+  });
+  formData.append('subVedas', JSON.stringify(subVedas));
+
+  // Married if applicable
+  if (document.getElementById('marriedItem').style.display !== 'none') {
+    formData.append('married', document.getElementById('previewMarried').textContent.toLowerCase());
+  }
+
+  // Photo (convert from data URL if available)
+  const photoDataUrl = localStorage.getItem('previewPhoto');
+  if (photoDataUrl && !photoDataUrl.includes('placeholder')) {
+    // Convert data URL to blob
+    const response = await fetch(photoDataUrl);
+    const blob = await response.blob();
+    formData.append('photo', blob, 'profile.jpg');
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/api/register", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Registration successful! 🚀\nPurohit ID: " + data.data.id);
+      // Clear localStorage
+      localStorage.removeItem('previewPhoto');
+      localStorage.removeItem('previewPassword');
+      localStorage.removeItem('registrationData');
+      window.location.href = 'main.html'; // Redirect to main page
+    } else {
+      alert("Error: " + (data.message || "Registration failed"));
+    }
+  } catch (error) {
+    alert("Network error: " + error.message);
+  }
+}
+
+// Load on page load
+window.onload = loadPreview;
+</script>
+
+</body>
+</html>

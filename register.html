@@ -278,10 +278,10 @@ button:hover {
     <label>Vedas Learned / వేదాలు</label>
     <div class="checkbox-group">
 
-      <label><input type="checkbox"> <div class="veda-text">Rigveda <small>ఋగ్వేదం</small></div></label>
-      <label><input type="checkbox"> <div class="veda-text">Yajurveda <small>యజుర్వేదం</small></div></label>
-      <label><input type="checkbox"> <div class="veda-text">Samaveda <small>సామవేదం</small></div></label>
-      <label><input type="checkbox"> <div class="veda-text">Atharvaveda <small>అథర్వవేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="rigveda"> <div class="veda-text">Rigveda <small>ఋగ్వేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="yajurveda"> <div class="veda-text">Yajurveda <small>యజుర్వేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="samaveda"> <div class="veda-text">Samaveda <small>సామవేదం</small></div></label>
+      <label><input type="checkbox" name="vedas" value="atharvaveda"> <div class="veda-text">Atharvaveda <small>అథర్వవేదం</small></div></label>
 
     </div>
 
@@ -371,6 +371,51 @@ document.getElementById("upanayana").addEventListener("change", function(){
     this.value === "yes" ? "block" : "none";
 });
 
+// LOAD DATA FROM STORAGE (when returning from preview)
+function loadFromStorage() {
+  const storedData = localStorage.getItem('registrationData');
+  if (storedData) {
+    const data = JSON.parse(storedData);
+
+    // Fill form fields
+    if (data.name) document.getElementById("name").value = data.name;
+    if (data.phone) document.getElementById("phone").value = data.phone;
+    if (data.email) document.getElementById("email").value = data.email;
+    if (data.password) document.getElementById("password").value = data.password;
+    if (data.confirmPassword) document.getElementById("confirmPassword").value = data.confirmPassword;
+    if (data.dob) document.getElementById("dob").value = data.dob;
+    if (data.upanayana) document.getElementById("upanayana").value = data.upanayana;
+    if (data.gotram) document.getElementById("gotram").value = data.gotram;
+    if (data.upasana) document.getElementById("upasana").value = data.upasana;
+
+    // Handle vedas checkboxes
+    if (data.vedas) {
+      const vedas = JSON.parse(data.vedas);
+      document.querySelectorAll("input[name='vedas']").forEach(checkbox => {
+        checkbox.checked = vedas[checkbox.value] || false;
+      });
+    }
+
+    // Handle sub-vedas tags
+    if (data.subVedas) {
+      const subVedas = JSON.parse(data.subVedas);
+      subVedas.forEach(tag => createTag(tag));
+    }
+
+    // Handle marriage
+    if (data.upanayana === "yes" && data.married) {
+      document.getElementById("marriageSection").style.display = "block";
+      document.getElementById("married").value = data.married;
+    }
+
+    // Handle photo
+    const photoSrc = localStorage.getItem('previewPhoto');
+    if (photoSrc && !photoSrc.includes('placeholder')) {
+      document.getElementById("previewImg").src = photoSrc;
+    }
+  }
+}
+
 // FORM SUBMIT
 document.getElementById("registerForm").addEventListener("submit", function(e){
   e.preventDefault();
@@ -383,8 +428,81 @@ document.getElementById("registerForm").addEventListener("submit", function(e){
     return;
   }
 
-  alert("All good! Ready for Preview 🚀");
+  // Collect form data for preview
+  let previewData = {};
+
+  // Get photo (store as data URL in localStorage)
+  let photoFile = document.getElementById("photo").files[0];
+  if(photoFile){
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      localStorage.setItem('previewPhoto', e.target.result);
+      redirectToPreview(previewData);
+    };
+    reader.readAsDataURL(photoFile);
+  } else {
+    localStorage.setItem('previewPhoto', document.getElementById("previewImg").src);
+    redirectToPreview(previewData);
+  }
+
+  function redirectToPreview(data) {
+    // Get basic info
+    data.name = document.getElementById("name").value;
+    data.phone = document.getElementById("phone").value;
+    data.email = document.getElementById("email").value;
+    data.password = document.getElementById("password").value;
+    data.confirmPassword = document.getElementById("confirmPassword").value;
+    data.dob = document.getElementById("dob").value;
+    data.gotram = document.getElementById("gotram").value;
+    data.upasana = document.getElementById("upasana").value;
+    data.upanayana = document.getElementById("upanayana").value;
+
+    // Store all data in localStorage
+    localStorage.setItem('registrationData', JSON.stringify(data));
+
+    // Get selected vedas
+    let vedas = {
+      rigveda: false,
+      yajurveda: false,
+      samaveda: false,
+      atharvaveda: false
+    };
+
+    document.querySelectorAll("input[name='vedas']:checked").forEach(checkbox => {
+      vedas[checkbox.value] = true;
+    });
+    data.vedas = JSON.stringify(vedas);
+
+    // Get sub-vedas (tags)
+    let subVedas = [];
+    document.querySelectorAll(".tag").forEach(tag => {
+      subVedas.push(tag.innerText.replace("×", "").trim());
+    });
+    data.subVedas = JSON.stringify(subVedas);
+
+    // Get married status if upanayana is yes
+    if(document.getElementById("upanayana").value === "yes"){
+      data.married = document.getElementById("married").value;
+    }
+
+    // Update localStorage with complete data
+    localStorage.setItem('registrationData', JSON.stringify(data));
+
+    // Build URL with parameters
+    let params = new URLSearchParams();
+    for(let key in data) {
+      if(key !== 'password' && key !== 'confirmPassword') { // Don't include passwords in URL
+        params.append(key, data[key]);
+      }
+    }
+
+    // Redirect to preview page
+    window.location.href = 'preview.html?' + params.toString();
+  }
 });
+
+// LOAD DATA ON PAGE LOAD
+window.onload = loadFromStorage;
 </script>
 
 </body>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Puja - Purohit Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* Telugu Font */
+    @font-face {
+      font-family: 'PottiTelugu';
+      src: url('./fonts/PottiSreeramulu-Regular.ttf') format('truetype');
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* BODY */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f3e5ab, #ffd89b, #ffb347);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* CONTAINER */
+    .container {
+      width: 100%;
+      max-width: 850px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgb(154, 145, 85);
+      position: relative;
+      overflow: hidden;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6a00, #ff8c42);
+    }
+
+    /* HEADINGS */
+    .logo-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff6a00;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #000;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        opacity: 0.8;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .telugu-subtitle {
+      color: #ff8c42;
+      font-family: 'PottiTelugu', serif;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    /* FORM GROUPS */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    /* INPUTS */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e1e5e9;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #ff6a00;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.1);
+    }
+
+    .mobile-input-wrapper {
+      display: flex;
+      align-items: center;
+      border: 2px solid #e1e5e9;
+      border-radius: 12px;
+      background: #f8f9fa;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .mobile-input-wrapper:focus-within {
+      border-color: #ff6a00;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.1);
+    }
+
+    .country-code {
+      background: #e9ecef;
+      padding: 15px 12px;
+      border-right: 2px solid #e1e5e9;
+      color: #495057;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    .mobile-input-wrapper input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 15px 20px 15px 10px;
+      font-size: 16px;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+    }
+
+    .mobile-input-wrapper input:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    /* BUTTON */
+    button[type="submit"] {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #ff6a00, #ff8c42);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 106, 0, 0.3);
+    }
+
+    .back-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: #ff6a00;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    /* Animation */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="main.html" class="back-link">
+    <i class="fas fa-arrow-left"></i> Back to Home
+  </a>
+
+  <div class="container">
+    <div class="logo-section">
+      <div class="logo">🕉 Purohit Connect</div>
+      <div class="subtitle">Book a Puja</div>
+      <div class="telugu-subtitle">పూజను బుక్ చేయండి</div>
+    </div>
+
+    <div id="bookingStep">
+      <form id="pujaBookingForm">
+
+        <!-- FULL NAME -->
+        <div class="form-group">
+          <label for="name">Booking Person Name / బుకింగ్ చేసే వ్యక్తి పేరు <span style="color: red;">*</span></label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-row">
+          <!-- MOBILE NUMBER -->
+          <div class="form-group">
+            <label for="mobile">Mobile Number / మొబైల్ నంబర్ <span style="color: red;">*</span></label>
+            <div class="mobile-input-wrapper">
+              <span class="country-code">+91</span>
+              <input type="tel" id="mobile" maxlength="10" placeholder="10-digit number" required>
+            </div>
+          </div>
+          <!-- ALTERNATIVE MOBILE NUMBER -->
+          <div class="form-group">
+            <label for="altMobile">Alternative Mobile Number / ప్రత్యామ్నాయ నంబర్</label>
+            <div class="mobile-input-wrapper">
+              <span class="country-code">+91</span>
+              <input type="tel" id="altMobile" maxlength="10" placeholder="10-digit number">
+            </div>
+          </div>
+        </div>
+
+        <!-- PUJA KIND -->
+        <div class="form-group">
+          <label for="pujaType">Kind of Puja / పూజ రకం <span style="color: red;">*</span></label>
+          <select id="pujaType" required onchange="toggleOtherPuja()">
+            <option value="" disabled selected>Select the ritual / ఆచారాన్ని ఎంచుకోండి</option>
+            <option value="Griha Pravesh">Griha Pravesh / గృహ ప్రవేశం</option>
+            <option value="Wedding">Wedding / వివాహం</option>
+            <option value="Homas">Homas / హోమాలు</option>
+            <option value="Namakaranam">Namakaranam / నామకరణం</option>
+            <option value="Vratas">Vratas / వ్రతాలు</option>
+            <option value="Navagraha Japas">Navagraha Japas / నవగ్రహ జపాలు</option>
+            <option value="Devata Pratishta">Devata Pratishta / దేవత ప్రతిష్ట</option>
+            <option value="Aparas">Aparas / అపరాలు</option>
+            <option value="Rudrabhishekam">Rudrabhishekam / రుద్రాభిషేకం</option>
+            <option value="Other">Other / ఇతర (Please specify)</option>
+          </select>
+        </div>
+
+        <!-- OTHER PUJA INPUT (Hidden by default) -->
+        <div class="form-group" id="otherPujaGroup" style="display: none;">
+          <label for="otherPuja">Specify the Puja / పూజ పేరు రాయండి <span style="color: red;">*</span></label>
+          <input type="text" id="otherPuja" placeholder="Enter puja name">
+        </div>
+
+        <!-- DATE & TIME -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pujaDate">Date of Puja / పూజ తేదీ <span style="color: rgb(255, 0, 0);">*</span></label>
+            <input type="date" id="pujaDate" required>
+          </div>
+          <div class="form-group">
+            <label>Time / సమయం <span style="color: red;">*</span></label>
+            <div style="display: flex; gap: 5px;">
+              <select id="pujaHour" required style="padding: 15px 10px;">
+                <option value="" disabled selected>HH</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+              <span style="display:flex;align-items:center;font-weight:bold;">:</span>
+              <select id="pujaMin" required style="padding: 15px 10px;">
+                <option value="" disabled selected>MM</option>
+              </select>
+              <select id="pujaAmPm" required style="padding: 15px 10px;">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOCATION -->
+        <div class="form-group">
+          <label for="location">Location of Ritual / వేదిక చిరునామా <span style="color: red;">*</span></label>
+          <div style="position: relative;">
+            <i class="fas fa-map-marker-alt" onclick="detectLocation()" title="Auto-detect Location"
+              style="position: absolute; left: 15px; top: 18px; color: #ff6a00; font-size: 18px; cursor: pointer; z-index: 10;"></i>
+            <textarea id="location" style="padding-left: 45px;"
+              placeholder="Enter complete address / పూర్తి చిరునామాను ఇక్కడ రాయండి" required></textarea>
+          </div>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit">Confirm Puja Booking / పూజ బుకింగ్‌ను నిర్ధారించండి</button>
+
+      </form>
+    </div>
+
+    <!-- OTP STEP -->
+    <div id="otpStep" style="display: none;">
+      <div class="form-group" style="text-align: center;">
+        <h3 style="margin-bottom: 10px; color: #ff6a00;"><i class="fas fa-mobile-alt"></i> Verify Mobile / మొబైల్
+          వెరిఫికేషన్</h3>
+        <p style="margin-bottom: 20px; font-size: 14px; color: #555;">An OTP has been sent to your primary mobile
+          number. Please enter it below.</p>
+
+        <label for="otpInput">Enter OTP / ఓటీపీ నమోదు చేయండి <span style="color: red;">*</span></label>
+        <input type="text" id="otpInput" maxlength="6"
+          style="text-align: center; letter-spacing: 5px; font-size: 20px; font-weight: bold;" placeholder="123456"
+          required>
+      </div>
+
+      <button id="verifyOtpBtn"
+        style="width: 100%; padding: 16px; background: linear-gradient(135deg, #27ae60, #2ecc71); border: none; border-radius: 12px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 15px;"
+        onmouseover="this.style.boxShadow='0 8px 25px rgba(39, 174, 96, 0.4)'"
+        onmouseout="this.style.boxShadow='none'">Verify & Finalize Booking</button>
+      <button
+        onclick="document.getElementById('otpStep').style.display='none'; document.getElementById('bookingStep').style.display='block';"
+        style="width: 100%; padding: 12px; background: transparent; border: 2px solid #ccc; border-radius: 12px; color: #555; font-size: 14px; cursor: pointer; margin-top: 10px;">Back
+        / వెనుకకు</button>
+    </div>
+  </div>
+
+  <script>
+    // PRE-FILL DATA IF USER IS LOGGED IN
+    window.onload = function () {
+      const loggedIn = localStorage.getItem('purohitLoggedIn') === 'true';
+      if (loggedIn) {
+        const userName = localStorage.getItem('purohitName');
+        const mobile = localStorage.getItem('purohitMobile');
+
+        if (userName) document.getElementById('name').value = userName;
+        if (mobile) document.getElementById('mobile').value = mobile;
+      }
+
+      // Set minimum date to tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      document.getElementById('pujaDate').setAttribute('min', tomorrow.toISOString().split('T')[0]);
+
+      // Populate minutes 00 to 59
+      const minSelect = document.getElementById('pujaMin');
+      for (let i = 0; i < 60; i++) {
+        let minStr = i < 10 ? '0' + i : i.toString();
+        let opt = document.createElement('option');
+        opt.value = minStr;
+        opt.text = minStr;
+        minSelect.add(opt);
+      }
+    };
+
+    function detectLocation() {
+      const locInput = document.getElementById('location');
+      locInput.value = "Detecting your location...";
+
+      const fallbackToIP = () => {
+        console.log("GPS Location failed or blocked, falling back to IP-based location.");
+        fetch('https://ipapi.co/json/')
+          .then(res => res.json())
+          .then(data => {
+            if (data.city) {
+              locInput.value = `${data.city}, ${data.region}, ${data.country_name} (Approximate)`;
+            } else {
+              locInput.value = "";
+              alert("Unable to detect location automatically.");
+            }
+          })
+          .catch(e => {
+            locInput.value = "";
+            alert("Unable to retrieve location automatically. Please enter manually.");
+          });
+      };
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            // Reverse geocoding via OpenStreetMap Nominatim
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`, {
+              headers: { 'Accept-Language': 'en-US,en;q=0.9' }
+            })
+              .then(res => res.json())
+              .then(data => {
+                locInput.value = data.display_name || `Lat: ${position.coords.latitude.toFixed(4)}, Lng: ${position.coords.longitude.toFixed(4)}`;
+              })
+              .catch(err => {
+                locInput.value = `Lat: ${position.coords.latitude.toFixed(4)}, Lng: ${position.coords.longitude.toFixed(4)}`;
+              });
+          },
+          function (error) {
+            fallbackToIP();
+          },
+          { timeout: 10000, enableHighAccuracy: true }
+        );
+      } else {
+        fallbackToIP();
+      }
+    }
+
+    function toggleOtherPuja() {
+      const type = document.getElementById('pujaType').value;
+      const otherGroup = document.getElementById('otherPujaGroup');
+      const otherInput = document.getElementById('otherPuja');
+
+      if (type === 'Other') {
+        otherGroup.style.display = 'block';
+        otherInput.required = true;
+      } else {
+        otherGroup.style.display = 'none';
+        otherInput.required = false;
+        otherInput.value = '';
+      }
+    }
+
+    function formatMobile(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length > 10) value = value.slice(0, 10);
+      input.value = value;
+
+      const wrapper = input.parentElement;
+      if (value.length === 10 && /^[6-9]/.test(value)) {
+        wrapper.style.borderColor = '#27ae60';
+      } else {
+        wrapper.style.borderColor = '#e1e5e9';
+      }
+    }
+
+    document.getElementById("mobile").addEventListener("input", function () { formatMobile(this); });
+    document.getElementById("altMobile").addEventListener("input", function () { formatMobile(this); });
+
+    let pendingBookingData = null;
+
+    // FORM SUBMISSION (TRIGGER OTP)
+    document.getElementById("pujaBookingForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let name = document.getElementById("name").value.trim();
+      let mobile = document.getElementById("mobile").value.trim();
+      let altMobile = document.getElementById("altMobile").value.trim();
+      let pujaType = document.getElementById("pujaType").value;
+      if (pujaType === 'Other') {
+        pujaType = document.getElementById("otherPuja").value.trim();
+      }
+
+      let pujaDate = document.getElementById("pujaDate").value;
+      let hour = document.getElementById("pujaHour").value;
+      let min = document.getElementById("pujaMin").value;
+      let ampm = document.getElementById("pujaAmPm").value;
+      let pujaTime = `${hour}:${min} ${ampm}`;
+      let location = document.getElementById("location").value.trim();
+
+      if (mobile.length !== 10 || !/^[6-9]/.test(mobile)) {
+        alert("Please enter a valid primary Mobile Number / దయచేసి సరైన మొబైల్ నంబర్ నమోదు చేయండి");
+        return;
+      }
+
+      if (altMobile && (altMobile.length !== 10 || !/^[6-9]/.test(altMobile))) {
+        alert("Please enter a valid alternative Mobile Number / దయచేసి సరైన ప్రత్యామ్నాయ నంబర్ నమోదు చేయండి");
+        return;
+      }
+
+      // Save to pending state
+      pendingBookingData = {
+        id: 'PJ' + Math.floor(10000 + Math.random() * 90000), // Random 5 digit ID
+        clientName: name,
+        mobile: mobile,
+        altMobile: altMobile || 'None',
+        type: pujaType,
+        date: pujaDate,
+        time: pujaTime,
+        location: location,
+        status: 'Pending'
+      };
+
+      // Show OTP Step
+      document.getElementById("bookingStep").style.display = "none";
+      document.getElementById("otpStep").style.display = "block";
+      alert(`An OTP has been sent to +91 ${mobile}.\n(For prototype, you can enter any 6-digit number)`);
+    });
+
+    // VERIFY OTP AND FINALIZE
+    document.getElementById("verifyOtpBtn").addEventListener("click", function () {
+      let otp = document.getElementById("otpInput").value.trim();
+      if (otp.length < 4) {
+        alert("Please enter a valid OTP");
+        return;
+      }
+
+      console.log('Puja Booked Successfully:', pendingBookingData);
+      alert(`OTP Verified! Booking Successful!\nYour Reference ID is ${pendingBookingData.id}.\nA Purohit will contact you shortly.\n\nఓటీపీ ధృవీకరించబడింది! మీ రిఫరెన్స్ ఐడి ${pendingBookingData.id}.`);
+
+      // Redirect back to main page
+      window.location.href = 'main.html';
+    });
+  </script>
+
+</body>
+
+</html>
